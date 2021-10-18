@@ -1,0 +1,16 @@
+---
+testspace:
+before:
+  ..
+after:
+  name: github::goodbye
+  description: Goodbye - using json array and list as input values
+  input: 
+    myarr: 
+      - one
+      - two
+      - three
+    mylist: 
+      this: one
+      that: other one
+---
